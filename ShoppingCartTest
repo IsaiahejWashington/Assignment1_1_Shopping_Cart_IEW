@@ -1,0 +1,63 @@
+
+public class ShoppingCartTest {
+
+	public static void main(String[] args) {
+		System.out.println("Creating an empty cart ");
+		ShoppingCartInterface<String>aCart= new LinkedCart<>();
+		testIsEmpty(aCart, true);
+		displayCart(aCart);
+		
+		String[]contentsOfCart = {" A"," D"," B"," A"," C"," A"," D"};
+		testAdd(aCart, contentsOfCart);
+		testIsEmpty(aCart,false);
+	
+
+	}//end main
+	
+	private static void testIsEmpty(ShoppingCartInterface<String>cart, boolean empty)
+	{
+		System.out.print("\n Testing isEmpty ");
+		if(empty)
+			System.out.println("an empty cart:");
+		else
+			System.out.println("a cart that is not empty: ");
+		
+		System.out.print("isEmpty finds the cart ");
+		if (empty && cart.isEmpty())
+			System.out.println("empty: OK");
+		else if (empty)
+			System.out.println("not empty, but it is: ERROR ");
+		else
+			System.out.println("not empty: OK ");
+		
+	}//end testISEmpty
+
+	
+	private static void testAdd(ShoppingCartInterface<String>aCart, String[]content)
+	{
+		System.out.print("Adding the following strings to the cart: ");
+		for(int index =0; index<content.length; index++)
+		{
+			if(aCart.add(content[index]))
+				System.out.print(content[index]+"");
+			else
+			System.out.print("\n Unable to add" + content[index] +" to the cart ");
+		}//end for
+		
+		System.out.println();
+		
+		displayCart(aCart);
+	}//end testAdd
+	
+	private static void displayCart(ShoppingCartInterface<String>aCart) {
+		System.out.println("The cart contains the following strings ");
+		Object[]cartArray = aCart.toArray();
+		for(int index =0; index<cartArray.length; index++)
+		{
+			System.out.println(cartArray[index]+"");
+		}//end for
+		
+		System.out.println();
+		}
+	}//end class
+	
